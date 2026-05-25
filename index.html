@@ -1,29 +1,16 @@
-Enter
-from flask import Flask, render_template, request
-import os
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Cancer Detection</title>
+</head>
+<body>
 
-app = Flask(__name__)
+    <h1>AI Cancer Detection Project</h1>
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
+    <form>
+        <input type="file">
+        <button type="submit">Predict</button>
+    </form>
 
-    prediction = ""
-
-    if request.method == 'POST':
-
-        file = request.files['file']
-
-        if file:
-            os.makedirs("static", exist_ok=True)
-
-            filepath = os.path.join("static", file.filename)
-
-            file.save(filepath)
-
-            prediction = "Cancer Not Detected"
-
-    return render_template("index.html", prediction=prediction)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
-     
+</body>
+</html>
