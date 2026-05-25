@@ -1,0 +1,29 @@
+Enter
+from flask import Flask, render_template, request
+import os
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+
+    prediction = ""
+
+    if request.method == 'POST':
+
+        file = request.files['file']
+
+        if file:
+            os.makedirs("static", exist_ok=True)
+
+            filepath = os.path.join("static", file.filename)
+
+            file.save(filepath)
+
+            prediction = "Cancer Not Detected"
+
+    return render_template("index.html", prediction=prediction)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5001)
+     
